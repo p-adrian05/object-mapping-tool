@@ -1,0 +1,61 @@
+## Object Mapping Setup Tool
+<a href="https://login.salesforce.com/packaging/installPackage.apexp?p0=04t09000000vLkcAAE">
+<img alt="Deploy to Salesforce"
+src="https://raw.githubusercontent.com/afawcett/githubsfdeploy/master/deploy.png">
+</a>
+
+The Mapping Setup Tool for setting up custom and standard
+object field mappings for object conversion can provide a user-friendly interface
+for configuring the mapping of fields between different objects.
+
+- The LWC could include features such as add, edit and delete field mappings,
+  and the ability to save, load, reload, clear and delete the mapping configurations.
+- It allows to select the source and target objects and fields and to traverse up to 5 levels of relationships.
+
+![img.png ](./documentation/images/mapping_setup_tool_empty.png)
+![img.png ](./documentation/images/mapping_setup_tool_loaded1.png)
+
+```html
+ <c-object-mapping-table onmappingtemplatechange={handleMappingTemplateChange}>
+</c-object-mapping-table>
+```
+### Attributes
+- title: The title of the mapping setup tool.
+- target-object-api-names: The list of target (convert from) object api names to filter the selectable templates and source objects by.
+- source-object-api-names: The list of source (convert to) object api names to filter the selectable templates and target objects by.
+- template-select-disable: The flag to disable the template to change, clear or delete after it is loaded.
+- onmappingtemplatechange: The event handler to handle the mapping template change event.
+  - Returns the mapping template id, source object api name and target object api name.
+```javascript
+handleMappingTemplateChange(event){
+  this.selectedTemplateId= event.detail.id;
+  this.selectedSourceObjectApiName = event.detail.sourceObjectApiName;
+  this.selectedTargetObjectApiName = event.detail.targetObjectApiName;
+}
+```
+### Invocable Methods
+- loadMappingTemplate: Loads the mapping template by the given mapping template id.
+- resetMappingTemplate: Resets the mapping template to the default state.
+
+## Object Mapping Template API 
+Provides a basic implementation for converting records using the ObjectMappingTemplate.
+```Apex
+//Initialize the object mapping template converter and service
+ObjectMappingTemplateConverter objectMappingTemplateConverter = new ObjectMappingTemplateConverterImpl();
+ObjectMappingTemplateService objectMappingTemplateService = 
+                                    new ObjectMappingTemplateServiceImpl(new ObjectMappingTemplateRepositoryImpl());
+
+//Get the object mapping template
+Id accountToContactTemplateId = 'a000900000bzj5tAAA';
+ObjectMappingTemplate accountToContactMappingTemplate =
+                                        objectMappingTemplateService.getObjectMappingTemplate(accountToContactTemplateId);
+
+Id accountIdToConvert = '0010900001w8nZ5AAI';
+
+//Convert the account to a contact
+Map<Id,SObject> accountIdContactMap = objectMappingTemplateConverter
+                            .convertRecords(new List<Id>{accountIdToConvert},accountToContactMappingTemplate);
+
+//Get the converted contact
+Contact convertedContact = (Contact) accountIdContactMap.get(accountIdToConvert);
+```
