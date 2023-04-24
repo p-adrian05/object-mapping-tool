@@ -40,21 +40,20 @@ handleMappingTemplateChange(event){
 ## Object Mapping Template API 
 Provides a basic implementation for converting records using the ObjectMappingTemplate.
 ```Apex
-//Initialize the object mapping template converter and service
+//Initialize the object mapping template converter and selector
 ObjectMappingTemplateConverter objectMappingTemplateConverter = new ObjectMappingTemplateConverterImpl();
-ObjectMappingTemplateService objectMappingTemplateService = 
-                                    new ObjectMappingTemplateServiceImpl(new ObjectMappingTemplateRepositoryImpl());
+ObjectMappingTemplatesSelector objectMappingTemplatesSelector = new ObjectMappingTemplatesSelector();
 
 //Get the object mapping template
 Id accountToContactTemplateId = 'a000900000bzj5tAAA';
 ObjectMappingTemplate accountToContactMappingTemplate =
-                                        objectMappingTemplateService.getObjectMappingTemplate(accountToContactTemplateId);
+        objectMappingTemplatesSelector.getObjectMappingTemplates(new Set<Id>{accountToContactTemplateId})[0];
 
 Id accountIdToConvert = '0010900001w8nZ5AAI';
 
 //Convert the account to a contact
 Map<Id,SObject> accountIdContactMap = objectMappingTemplateConverter
-                            .convertRecords(new List<Id>{accountIdToConvert},accountToContactMappingTemplate);
+        .convertRecords(new List<Id>{accountIdToConvert},accountToContactMappingTemplate);
 
 //Get the converted contact
 Contact convertedContact = (Contact) accountIdContactMap.get(accountIdToConvert);

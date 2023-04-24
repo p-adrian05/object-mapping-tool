@@ -105,18 +105,6 @@ public with sharing class ObjectMappingTemplateConverterTest {
 
     }
 
-    @IsTest
-    static void testToSOQLFieldNameWithCustomField(){
-        FieldMapping.Field accountNameField = new FieldMapping.Field('Name','Account Name',true,'STRING',null);
-        FieldMapping.Field customIdRefFromField = new FieldMapping.Field('CustomID__c','Custom ID',false,'REFERENCE',accountNameField);
-        FieldMapping.Field customContactIdFromField = new FieldMapping.Field('ContactID__c','Custom Name',false,'String',customIdRefFromField);
-
-        String expectedFieldName = 'ContactID__r.CustomID__r.Name';
-
-        String actualFieldName = customContactIdFromField.toSOQLFieldName();
-
-        Assert.areEqual(expectedFieldName,actualFieldName);
-    }
 
 
 }

@@ -25,7 +25,7 @@ public with sharing class ObjectMappingTemplateConverterImpl implements ObjectMa
      @return a map containing the created records, where the keys of the map are the IDs of the source records
             and the values are the created records themselves.
  */
-    private Map<Id, SObject> convertRecords(List<SObject> sourceRecords,ObjectMappingTemplate objectMappingTemplate) {
+    public Map<Id, SObject> convertRecords(List<SObject> sourceRecords,ObjectMappingTemplate objectMappingTemplate) {
         ObjectUtil.requireNonEmpty(sourceRecords, 'Source Records cannot be empty!');
         Map<Id, SObject> sourceRecordIdTargetRecordMap = new Map<Id, SObject>();
         validateMappingTemplate(objectMappingTemplate);
@@ -34,7 +34,7 @@ public with sharing class ObjectMappingTemplateConverterImpl implements ObjectMa
             // Create a new target record
             SObject targetRecord = (SObject) System.Type.forName(objectMappingTemplate.targetObjectApiName)
                     .newInstance();
-            System.debug('Source Record: ' + sourceRecord.Id);
+            //System.debug('Source Record: ' + sourceRecord.Id);
             // Map the source fields to the target fields
             for (FieldMapping fieldMapping : objectMappingTemplate.fieldMappings) {
                 validateFieldMapping(fieldMapping);
@@ -42,10 +42,10 @@ public with sharing class ObjectMappingTemplateConverterImpl implements ObjectMa
                 String sourceFieldName = fieldMapping.sourceObjectField.toSOQLFieldName();
                 String targetFieldName = fieldMapping.targetObjectField.toSOQLFieldName();
 
-                System.debug('Source Field: ' + sourceFieldName + ' Target Field: ' + targetFieldName);
+                //System.debug('Source Field: ' + sourceFieldName + ' Target Field: ' + targetFieldName);
                 // Get the value of the source field
                 Object sourceFieldValue = getFieldValueFromSObject(sourceFieldName,sourceRecord);
-                System.debug('Source Field Value: ' + sourceFieldValue);
+                //System.debug('Source Field Value: ' + sourceFieldValue);
                 // Set the value of the target field
                 targetRecord.put(targetFieldName,sourceFieldValue);
             }
