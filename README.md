@@ -1,5 +1,5 @@
 ## Object Mapping Setup Tool
-<a href="https://login.salesforce.com/packaging/installPackage.apexp?p0=04t09000000vLkcAAE">
+<a href="https://login.salesforce.com/packaging/installPackage.apexp?p0=04t7Q0000009tfnQAA">
 <img alt="Deploy to Salesforce"
 src="https://raw.githubusercontent.com/afawcett/githubsfdeploy/master/deploy.png">
 </a>
