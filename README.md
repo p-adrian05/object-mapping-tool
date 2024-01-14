@@ -3,6 +3,8 @@
 The Mapping Setup Tool for setting up custom and standard Salesforce
 SObject field mappings with providing a user-friendly interface.
 
+See usage in the [Object Conversion Tool](https://github.com/p-adrian05/object-conversion-tool)
+
 - The Lightning Web Component include features such as add, edit and delete field mappings,
   and the ability to save, load, reload and delete the mapping configurations called templates.
 - It allows to select the source and target objects and fields and to traverse up to 5 levels of relationships.
