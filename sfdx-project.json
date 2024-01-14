@@ -1,0 +1,21 @@
+{
+  "packageDirectories": [
+    {
+      "path": "force-app",
+      "package": "Object Mapping Tool",
+      "versionName": "ver 1.0",
+      "versionNumber": "1.0.0.NEXT",
+      "versionDescription": ""
+    }
+  ],
+  "name": "Object Mapping Tool",
+  "namespace": "",
+  "sfdcLoginUrl": "https://login.salesforce.com",
+  "sourceApiVersion": "57.0",
+  "packageAliases": {
+    "Object Mapping Tool": "0Ho7Q000000PB44SAG",
+    "Object Mapping Tool@0.1.0-1": "04t7Q0000009tfdQAA",
+    "Object Mapping Tool@0.1.0-2": "04t7Q0000009tfiQAA",
+    "Object Mapping Tool@1.0.0-1": "04t7Q0000009tfnQAA"
+  }
+}
