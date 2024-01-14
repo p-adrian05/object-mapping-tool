@@ -1,6 +1,6 @@
 ## Object Mapping Setup Tool
 
-The Mapping Setup Tool for setting up custom and standard Salesforce
+The Field Mapping Setup Tool for setting up custom and standard Salesforce
 SObject field mappings with providing a user-friendly interface.
 
 See usage in the [Object Conversion Tool](https://github.com/p-adrian05/object-conversion-tool)
